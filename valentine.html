@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularz walentynkowy</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            padding-top: 50px;
+        }
+        h1 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #c30052;
+        }
+        .gif-container {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 300px;
+        }
+        .tenor-gif-embed {
+            width: 100% !important;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Czy będziesz moją walentynką?</h1>
+
+<div id="buttons">
+    <button class="button" onclick="submitForm(true)">Tak</button>
+    <button class="button" id="noButton">Nie</button>
+</div>
+
+<div class="gif-container" id="gif-container">
+    <!-- Początkowa naklejka GIF -->
+    <div class="tenor-gif-embed" data-postid="24359199" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div>
+</div>
+
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+<<script>
+    let noButtonTexts = ["Napewno?", "No weeź", "Łamiesz mi serce ):", "Nie żartuj sobie tak"];
+    let clickCount = 0;
+    const noButton = document.getElementById('noButton');
+    const gifContainer = document.getElementById('gif-container');
+
+    // Wstawienie początkowego GIFa
+    insertGif('24359199'); // Użyj funkcji insertGif do wstawienia początkowego GIFa
+
+    noButton.onclick = function() {
+        if (clickCount < noButtonTexts.length) {
+            noButton.textContent = noButtonTexts[clickCount];
+            insertGif('13819099'); // Teraz ten GIF będzie wyświetlany po kliknięciu "Nie"
+            clickCount++;
+        } else {
+            alert("Nie udało się wypełnić formularza");
+            resetForm();
+        }
+    }
+
+    function submitForm(isAccepted) {
+        if (isAccepted) {
+            insertGif('21158215'); // Teraz ten GIF będzie wyświetlany po kliknięciu "Tak"
+            alert("Formularz został pomyślnie przesłany");
+            document.getElementById('buttons').style.display = 'none';
+        }
+    }
+
+    function resetForm() {
+        clickCount = 0;
+        noButton.textContent = "Nie";
+        insertGif('24359199'); // Reset do początkowego GIFa "24359199"
+    }
+
+    function insertGif(postId) {
+        gifContainer.innerHTML = '<div class="tenor-gif-embed" data-postid="' + postId + '" data-share-method="host" data-width="100%" data-aspect-ratio="1.0"></div>';
+        // Ponowne załadowanie skryptu Tenor
+        const scriptTag = document.createElement('script');
+        scriptTag.src = 'https://tenor.com/embed.js';
+        scriptTag.async = true;
+        document.body.appendChild(scriptTag);
+    }
+</script>
+
+
+
+
+</body>
+</html>
